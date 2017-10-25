@@ -27,3 +27,5 @@ This is achieved by the SimpleSAMLPHP library querying the groups assigned to th
 6. Add users to your AD groups and allow Duo to sync with Active Directory
 7. Import your updated IKEY.json file in to your Duo Access Gateway console
 8. Test logging in to CloudHealth via Duo
+
+__Ensure your users are a member of a single cloudhealth-* Active Directory group__
