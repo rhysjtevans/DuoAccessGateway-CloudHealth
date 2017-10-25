@@ -5,8 +5,8 @@ This guide applies to the [Duo Access Gateway](https://duo.com/docs/dag) however
 
 ## Motivation
 
- The goal for this was to remove the CloudHealth role e.g. cloudhealth-administrator from an Active Directory user attribute e.g. extensionAttribute1 to group based membership.
- As a result the management and reporting of user access roles is standardised alongside other reporting processes.
+ The goal for this was to remove the CloudHealth role e.g. cloudhealth-administrator from an Active Directory user attribute e.g. extensionAttribute1 and move it to a standardised group based membership.
+ As a result, the management and reporting on user access roles is standardised alongside other reporting processes and far simpler to update.
 
 
 ## Overview
