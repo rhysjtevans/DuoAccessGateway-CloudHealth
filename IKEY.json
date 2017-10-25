@@ -1,0 +1,52 @@
+{
+    "{{ EntityID }}": {
+        "AssertionConsumerService": "{{ AssertionEndpointURI }}",
+        "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+        "authproc": {
+            "10": {
+                "0": "%remove",
+                "class": "core:AttributeAlter",
+                "pattern": "/^((?!cloudhealth-)[\\s\\S])*$/",
+                "subject": "roles"
+            },
+            "20": {
+                "0": "%replace",
+                "1": "%format",
+                "class": "core:AttributeAlter",
+                "pattern": "/cloudhealth-[^,]+/",
+                "replacement": "%s",
+                "subject": "roles"
+            },
+            "5": {
+                "attribute.groups": "roles",
+                "authsource": "duo-ldap",
+                "class": "ldap:AttributeAddUsersGroups",
+                "ldap.debug": false,
+                "ldap.product": "ActiveDirectory",
+                "ldap.timeout": 0
+            },
+            "80": {
+                "class": "duosecurity:Duosecurity",
+                "host": "{{ DuoAPIHost}}",
+                "ikey": "{{ DuoAppIKey }}",
+                "skey": "{{ DuoAppSKey }}"
+            }
+        },
+        "generic": true,
+        "idpFirst": true,
+        "integrationName": "{{ DuoAppName }}",
+        "saml20.sign.assertion": true,
+        "saml20.sign.response": true,
+        "signature.algorithm": "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
+        "simplesaml.attributes": true,
+        "simplesaml.nameidattribute": "mail",
+        "spName": "{{ DuoAppName }}",
+        "supportedAuthsources": [
+            "duo_ad",
+            "duo_openldap",
+            "duo_proxy",
+            "duo_google-oidc",
+            "duo_azure-oidc"
+        ]
+    }
+}
