@@ -1,21 +1,25 @@
 # DuoAccessGateway (SimpleSAMLPHP) & CloudHealth
+This JSON file will allow the mapping of Active Directory groups to CloudHealth Roles instead of the CloudHealth standard of using Active Directory Attributes.
 
-This JSON file will allow the mapping of AD Groups to manage user roles/permissions with [CloudHealth](https://www.cloudhealthtech.com) using the Duo Access Gateway as an SSO endpoint instead of manually specifying the name of the role in each user accounts Active Directory attribute.
+This guide applies to the [Duo Access Gateway](https://duo.com/docs/dag) however the AuthProc rules & regex can be modified to suit your needs
 
-It does this by querying the groups assigned to the user in Active Directory and performs a regex query against them removing anything that doesn't fit the CloudHealth naming convention of "cloudhealth-ROLENAME" e.g. "cloudhealth-administrator"
+## Motivation
 
-The [SimpleSAMLPHP](https://simplesamlphp.org) Authentication [Processing Filter](https://simplesamlphp.org/docs/1.5/simplesamlphp-authproc) **attributealter** is used to manipulate the SAMLResponse.
+ The goal for this was to remove the CloudHealth role e.g. cloudhealth-administrator from an Active Directory user attribute e.g. extensionAttribute1 to group based membership.
+ As a result the management and reporting of user access roles is standardised alongside other reporting processes.
 
-This guide applies to the [Duo Access Gateway](https://duo.com/docs/dag) however the AuthProc can be modified to suit your needs.
 
-Synchornising groups and users to Duo is outside scope.
+## Overview
+Duo utilises [SimpleSAMLPHP](https://simplesamlphp.org) and therefore the Authentication [Processing Filter](https://simplesamlphp.org/docs/1.5/simplesamlphp-authproc) **attributealter** is used to manipulate the SAMLResponse sent to CloudHealth.
+
+This is achieved by the SimpleSAMLPHP library querying the groups assigned to the user in Active Directory and performs a regex query against them removing anything that doesn't fit the CloudHealth naming convention of "cloudhealth-ROLENAME" e.g. "cloudhealth-administrator"
 
 ## Getting Started
 
 1. Create a new Application in the Duo Web Admin console as per usual with the correct settings
 2. Download the IKEY.json file from this repo
 3. Download the Duo CloudHealth Application config from the Duo Admin Console
-4. Open both and substitue the Jinja variables with the values in the downloaded config from Duo Admin Console
+4. Open both and substitute the Jinja variables with the values in the downloaded config from Duo Admin Console
 5. Create AD groups matching the role ID's found in the CloudHealth admin console.  E.g.  
     - cloudhealth-administrator  
     - cloudhealth-standard  
