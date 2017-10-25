@@ -1,5 +1,5 @@
 # DuoAccessGateway (SimpleSAMLPHP) & CloudHealth
-This JSON file will allow the mapping of Active Directory groups to CloudHealth Roles instead of the CloudHealth standard of using Active Directory Attributes.
+This JSON file will allow the mapping of Active Directory groups to [CloudHealth](https://www.cloudhealthtech.com) Roles instead of the CloudHealth standard of using Active Directory Attributes.
 
 This guide applies to the [Duo Access Gateway](https://duo.com/docs/dag) however the AuthProc rules & regex can be modified to suit your needs
 
